@@ -1,67 +1,67 @@
 view_program <- function() {
-  # Map menu numbers to file paths
-  # Map menu numbers to file paths
-  # Use system.file to find files inside the installed package
-  # "programs" matches the folder name inside "inst"
-  programs <- list(
-    "1" = system.file("programs", "prog1.R", package = "rlab"),
-    "2" = system.file("programs", "prog2.R", package = "rlab"),
-    "3" = system.file("programs", "prog3.R", package = "rlab"),
-    "4" = system.file("programs", "prog4.R", package = "rlab"),
-    "5" = system.file("programs", "prog5.R", package = "rlab"),
-    "6" = system.file("programs", "prog6.R", package = "rlab"),
-    "7" = system.file("programs", "prog7.R", package = "rlab"),
-    "8" = system.file("programs", "prog8.R", package = "rlab"),
-    "9" = system.file("programs", "prog9.R", package = "rlab")
+  programs <- setNames(paste0("prog", 1:9, ".R"), as.character(1:9))
+
+  find_file <- function(fname) {
+    p <- system.file("programs", fname, package = "rlab")
+    if (nzchar(p) && file.exists(p)) return(p)
+    p2 <- file.path("inst", "programs", fname)
+    if (file.exists(p2)) return(p2)
+    NA_character_
+  }
+
+  menu_text <- paste0(
+"======================================\n",
+"   Program Index\n",
+"======================================\n\n",
+"1. Arithmetic Operation, Looping, Conditionals\n",
+"2. Creating and Manipulating Data Structures\n",
+"3. Basic Statistical Operations on Datasets\n",
+"4. Data Import, Cleaning, and Export\n",
+"5. Advanced dplyr Manipulation and Grouping\n",
+"6. Data Visualization with ggplot2\n",
+"7. Linear and Multiple Regression Analysis\n",
+"8. K-Means Clustering and PCA\n",
+"9. Time Series Analysis (ARIMA, Decomposition)\n\n",
+"0. Exit\n",
+"======================================\n"
   )
 
-  while (TRUE) {
-    cat("
-======================================
-   Program Index
-======================================
-
-1. Arithmetic Operation, Looping Statements,
-   Conditional Statements
-
-2. Creating and Manipulating Data Structures
-
-3. Basic Statistical Operations on Open-Source Datasets
-
-4. Data Import, Cleaning, and Export with Advanced Data Wrangling
-
-5. Advanced Data Manipulation with dplyr and Complex Grouping
-
-6. Data Visualization with ggplot2 and Customizations
-
-7. Linear and Multiple Regression Analysis
-   with Interaction Terms
-
-8. K-Means Clustering and PCA for Dimensionality Reduction
-
-9. Time Series Analysis using ARIMA and Seasonal Decomposition
-
-======================================
-")
-
-
-    cat("0. Exit\n")
+  repeat {
+    cat(menu_text)
     choice <- readline("\nEnter program number to view (or 0 to exit): ")
 
     if (choice == "0") {
       cat("Exiting...\n")
       break
-    } else if (choice %in% names(programs)) {
-      file <- programs[[choice]]
-      cat("\n------------------------------------------------\n")
-      cat(sprintf(" CODE FOR PROGRAM %s (%s)", choice, file))
-      cat("\n------------------------------------------------\n")
-      code <- readLines(file, warn = FALSE)
-      cat(paste(code, collapse = "\n"))
-      cat("\n------------------------------------------------\n")
-      readline("\nPress Enter to return to menu...")
-    } else {
-      cat("Invalid selection. Please try again.\n")
     }
+
+    if (!choice %in% names(programs)) {
+      cat("Invalid selection. Try 1-9 or 0 to exit.\n\n")
+      next
+    }
+
+    fname <- programs[[choice]]
+    file_path <- find_file(fname)
+
+    if (is.na(file_path)) {
+      cat(sprintf("Program file '%s' not found. Make sure inst/programs/%s exists or the package is installed.\n\n",
+                  fname, fname))
+      next
+    }
+
+    cat("\n------------------------------------------------\n")
+    cat(sprintf(" CODE FOR PROGRAM %s (%s)\n", choice, file_path))
+    cat("------------------------------------------------\n")
+
+    tryCatch({
+      code <- readLines(file_path, warn = FALSE)
+      cat(paste(code, collapse = "\n"), "\n")
+    }, error = function(e) {
+      cat("Error reading file:", e$message, "\n")
+    })
+
+    cat("------------------------------------------------\n")
+    readline("Press Enter to return to menu...")
+    cat("\n")
   }
 }
