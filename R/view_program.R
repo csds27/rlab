@@ -25,10 +25,10 @@ view_program <- function() {
 "10. Interactive Visualisation with plotly and dynamic reports with R-Markdown\n\n",
     "Part - B\n",
 "11. AirPassengers dataset\n",
-"11. AirPassengers dataset\n",
-"11. AirPassengers dataset\n",
-"11. AirPassengers dataset\n",
-"11. AirPassengers dataset\n",
+"12. Nottem dataset\n",
+"13. lynx dataset\n",
+"14. USAccDeaths dataset\n",
+"15. Sunspots dataset\n",
 "\n0. Exit\n",
 "======================================\n"
   )
