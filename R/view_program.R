@@ -1,5 +1,5 @@
 view_program <- function() {
-  programs <- setNames(paste0("prog", 1:9, ".R"), as.character(1:9))
+  programs <- setNames(paste0("prog", 1:10, ".R"), as.character(1:10))
 
   find_file <- function(fname) {
     p <- system.file("programs", fname, package = "rlab")
@@ -22,6 +22,7 @@ view_program <- function() {
 "7. Linear and Multiple Regression Analysis\n",
 "8. K-Means Clustering and PCA\n",
 "9. Time Series Analysis (ARIMA, Decomposition)\n\n",
+"10. Interactive Visualisation with plotly and dynamic reports with R-Markdown\n",
 "0. Exit\n",
 "======================================\n"
   )
@@ -36,7 +37,7 @@ view_program <- function() {
     }
 
     if (!choice %in% names(programs)) {
-      cat("Invalid selection. Try 1-9 or 0 to exit.\n\n")
+      cat("Invalid selection. Try 1-10 or 0 to exit.\n\n")
       next
     }
 
