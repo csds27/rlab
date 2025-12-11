@@ -4,15 +4,15 @@ view_program <- function() {
   # Use system.file to find files inside the installed package
   # "programs" matches the folder name inside "inst"
   programs <- list(
-    "1" = system.file("programs", "prog1.R", package = "RLabPrograms"),
-    "2" = system.file("programs", "prog2.R", package = "RLabPrograms"),
-    "3" = system.file("programs", "prog3.R", package = "RLabPrograms"),
-    "4" = system.file("programs", "prog4.R", package = "RLabPrograms"),
-    "5" = system.file("programs", "prog5.R", package = "RLabPrograms"),
-    "6" = system.file("programs", "prog6.R", package = "RLabPrograms"),
-    "7" = system.file("programs", "prog7.R", package = "RLabPrograms"),
-    "8" = system.file("programs", "prog8.R", package = "RLabPrograms"),
-    "9" = system.file("programs", "prog9.R", package = "RLabPrograms")
+    "1" = system.file("programs", "prog1.R", package = "rlab"),
+    "2" = system.file("programs", "prog2.R", package = "rlab"),
+    "3" = system.file("programs", "prog3.R", package = "rlab"),
+    "4" = system.file("programs", "prog4.R", package = "rlab"),
+    "5" = system.file("programs", "prog5.R", package = "rlab"),
+    "6" = system.file("programs", "prog6.R", package = "rlab"),
+    "7" = system.file("programs", "prog7.R", package = "rlab"),
+    "8" = system.file("programs", "prog8.R", package = "rlab"),
+    "9" = system.file("programs", "prog9.R", package = "rlab")
   )
 
   while (TRUE) {
